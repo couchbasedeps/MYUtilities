@@ -207,7 +207,7 @@ bool MYIsDebuggerAttached(void)
 
 
 #if !TARGET_CPU_X86_64 && !TARGET_CPU_X86
-void _MYBreakpoint() {
+void _MYBreakpoint(void) {
     pthread_kill(pthread_self(), SIGINT);
 }
 #endif
