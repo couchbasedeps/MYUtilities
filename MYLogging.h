@@ -60,7 +60,7 @@ typedef struct MYLogDomain {
 
     #define DefineLogDomain(DOMAIN) \
         MYLogDomain DOMAIN##_LogDomain = {(MYLogLevel)255, #DOMAIN}; \
-        __attribute__((constructor)) static void register_##DOMAIN##_LogDomain() \
+        __attribute__((constructor)) static void register_##DOMAIN##_LogDomain(void) \
             { DOMAIN##_LogDomain.next = gMYLogDomainList; gMYLogDomainList = &DOMAIN##_LogDomain; }
 
 

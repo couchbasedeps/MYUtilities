@@ -44,7 +44,7 @@ static MYLogLevel enableLogTo(NSString *domain, MYLogLevel level);
 static MYLoggingTo loggingMode(void);
 
 
-static void InitLogging() {
+static void InitLogging(void) {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         @autoreleasepool {
@@ -142,7 +142,7 @@ MYLogLevel EnableLogTo(NSString *domain, MYLogLevel level) {
 #endif
 
 
-NSArray* AllLogDomains() {
+NSArray* AllLogDomains(void) {
     NSMutableArray* names = $marray();
     for (MYLogDomain* domain = gMYLogDomainList; domain; domain = domain->next) {
         if (domain != &MYDefault_LogDomain)
@@ -185,7 +185,7 @@ static MYLoggingTo getLoggingMode(int fd ) {
 #endif
 }
 
-static MYLoggingTo loggingMode() {
+static MYLoggingTo loggingMode(void) {
     static MYLoggingTo sMode;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
