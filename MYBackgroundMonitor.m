@@ -24,12 +24,12 @@
 @synthesize onBackgroundTaskExpired=_onBackgroundTaskExpired;
 
 
-static BOOL runningInAppExtension() {
+static BOOL runningInAppExtension(void) {
     return [[[[NSBundle mainBundle] bundlePath] pathExtension] isEqualToString: @"appex"];
 }
 
 
-static UIApplication* sharedApplication() {
+static UIApplication* sharedApplication(void) {
     return [[UIApplication class] performSelector: @selector(sharedApplication)];
 }
 
