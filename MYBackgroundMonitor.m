@@ -101,9 +101,9 @@ static UIApplication* sharedApplication(void) {
                                                      expirationHandler: ^{
                 // Process ran out of background time before endBackgroundTask was called.
                 // NOTE: Called on the main thread
-                if (_bgTask != UIBackgroundTaskInvalid) {
-                    if (_onBackgroundTaskExpired)
-                        _onBackgroundTaskExpired();
+                if (self->_bgTask != UIBackgroundTaskInvalid) {
+                    if (self->_onBackgroundTaskExpired)
+                        self->_onBackgroundTaskExpired();
                     [self endBackgroundTask];
                 }
             }];
