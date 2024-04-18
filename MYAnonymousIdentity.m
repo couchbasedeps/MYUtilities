@@ -130,8 +130,11 @@ static BOOL generateRSAKeyPair(int sizeInBits,
                                 (__bridge id)kSecAttrIsPermanent:   @(permanent)
 #endif
                                 };
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if (!checkErr(SecKeyGeneratePair((__bridge CFDictionaryRef)pairAttrs, publicKey, privateKey),
                   outError))
+#pragma clang diagnostic pop
         return NO;
     CFAutorelease(*publicKey);
     CFAutorelease(*privateKey);
@@ -238,11 +241,14 @@ static NSData* signData(SecKeyRef privateKey, NSData* inputData) {
     if (!transform)
         return nil;
     NSData* resultData = nil;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if (SecTransformSetAttribute(transform, kSecDigestTypeAttribute, kSecDigestSHA1, NULL)
         && SecTransformSetAttribute(transform, kSecTransformInputAttributeName,
                                     (__bridge CFDataRef)inputData, NULL)) {
             resultData = CFBridgingRelease(SecTransformExecute(transform, NULL));
         }
+#pragma clang diagnostic push
     CFRelease(transform);
     return resultData;
 #endif
